@@ -1,6 +1,3 @@
-Thanks for buying the plugin, your support is appreciated.
-You can always find me at rusuandreirobert@gmail.com with your questions.
-
 The usage of this plugin is really simple.
 
 Just start by opening the file controllerFile.php from theme-feature-controller/features/demo
