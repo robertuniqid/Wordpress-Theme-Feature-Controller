@@ -1,0 +1,59 @@
+<?php if(isset($success)) : ?>
+  <div class="alert alert-success"><?php echo $success;?></div>
+<?php endif;?>
+
+<?php if(isset($error)) : ?>
+  <div class="alert alert-error"><?php echo $error;?></div>
+<?php endif;?>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th><?php echo __('Name');?></th>
+      <th><?php echo __('Description');?></th>
+      <th><?php echo __('Status');?></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <?php foreach($pluginInformation as $plugin) : ?>
+      <tr>
+        <td><?php echo $plugin['name'];?></td>
+        <td><?php echo $plugin['description'];?></td>
+        <td>
+          <?php if($plugin['is_installed'] == false) : ?>
+            <span class="text-error"><?php echo __('Not Installed');?></span>
+          <?php else : ?>
+            <?php if($plugin['is_active'] == true) : ?>
+              <span class="text-success"><?php echo __('Active');?></span>
+            <?php else : ?>
+              <span class="text-danger"><?php echo __('Disabled');?></span>
+            <?php endif;?>
+          <?php endif;?>
+        </td>
+        <td>
+          <?php if($plugin['is_installed'] == false) : ?>
+            <a class="btn btn-success"
+               href="<?php echo ThemeFeatureController_Model_Helper_Request::getCurrentPageUrl() . '&plugin_alias=' . $plugin['alias'] . '&action=install';?>"
+              ><?php echo __('Install & Activate');?></a>
+          <?php else : ?>
+            <?php if($plugin['is_active'] == true) : ?>
+              <a class="btn btn-warning"
+                 href="<?php echo ThemeFeatureController_Model_Helper_Request::getCurrentPageUrl() . '&plugin_alias=' . $plugin['alias'] . '&action=deactivate';?>"
+                  ><?php echo __('Deactivate');?></a>
+            <?php else : ?>
+              <a class="btn btn-primary"
+                 href="<?php echo ThemeFeatureController_Model_Helper_Request::getCurrentPageUrl() . '&plugin_alias=' . $plugin['alias'] . '&action=activate';?>"
+                  ><?php echo __('Activate');?></a>
+            <?php endif;?>
+
+            <a class="btn btn-danger"
+               href="<?php echo ThemeFeatureController_Model_Helper_Request::getCurrentPageUrl() . '&plugin_alias=' . $plugin['alias'] . '&action=uninstall';?>"
+                ><?php echo __('Uninstall');?></a>
+          <?php endif;?>
+        </td>
+      </tr>
+    <?php endforeach;?>
+  </tbody>
+</table>
